@@ -51,7 +51,7 @@ export default [
             {
                 name: '用户管理',
                 path: '/admin/user',
-                // component: 'admin/user',
+                component: './Admin/User',
             },
             {
                 name: '帖子管理',

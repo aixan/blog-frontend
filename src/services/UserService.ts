@@ -31,7 +31,7 @@ export async function userLogout() {
  * @param params 登录请求对象
  */
 export async function userRegister(params: UserType.UserRegisterRequest) {
-    return request<BaseResponse<string>>('/user/register',{
+    return request<BaseResponse<string>>('/admin/user/register',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -46,5 +46,58 @@ export async function userRegister(params: UserType.UserRegisterRequest) {
 export async function getLoginUser() {
     return request<BaseResponse<UserType.UserVo>>('/admin/getInfo', {
         method: 'GET',
+    });
+}
+
+/**
+ * 分页获取用户列表
+ * @param params
+ */
+export async function listUserByPage(params: UserType.UserQueryRequest) {
+    return request<BaseResponse<PageVo<UserType.UserVo[]>>>('/admin/user/list', {
+        method: 'GET',
+        params,
+    });
+}
+
+/**
+ * 创建用户
+ * @param params
+ */
+export async function addUser(params: UserType.UserAddRequest) {
+    return request<BaseResponse<number>>('/admin/user', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        data: params,
+    });
+}
+
+/**
+ * 更新用户
+ * @param params
+ */
+export async function updateUser(params: UserType.UserUpdateRequest) {
+    return request<BaseResponse<any>>(`/admin/user`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        data: params,
+    });
+}
+
+/**
+ * 删除用户
+ * @param params
+ */
+export async function deleteUser(params: UserType.UserDeleteRequest) {
+    return request<BaseResponse<boolean>>(`/admin/user/${params.id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        data: params,
     });
 }
