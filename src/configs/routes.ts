@@ -10,25 +10,19 @@ export default [
         component: './Index',
     },
     {
-        name: '个人页面',
-        path: '/home',
-        component: './Home',
-    },
-    {
         name: '权限演示',
         path: '/access',
         component: './Access',
     },
     {
-        name: ' CRUD 示例',
-        path: '/table',
-        component: './Table',
-    },
-
-    {
         path: '/user',
         hideInMenu: true,
         headerRender: false,
+        layout: {
+            hideMenu: false,
+            hideNav: false,
+            hideFooter: false,
+        },
         routes: [
             {
                 name: '用户登录',
@@ -64,9 +58,20 @@ export default [
                 // component: 'admin/tag',
             },
             {
-                name: '举报管理',
-                path: '/admin/report',
-                // component: 'admin/report',
+                name: '日志中心',
+                path: '/admin/log',
+                routes: [
+                    {
+                        name: '操作日志',
+                        path: '/admin/log/operation',
+                        component: './Admin/Log/Operation',
+                    },
+                    {
+                        name: '登录日志',
+                        path: '/admin/log/login',
+                        component: './Admin/Log/Login',
+                    },
+                ]
             },
         ],
     },

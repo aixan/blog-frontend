@@ -36,31 +36,36 @@ const AdminUserPage: React.FC<unknown> = () => {
     const actionRef = useRef<ActionType>();
 
     /**
-     * B表格列配置
+     * 表格列配置
      */
     const columns: ProColumns<UserType.UserVo>[] = [
         {
             title: 'ID',
+            align: 'center',
             dataIndex: 'id',
             valueType: 'index',
         },
         {
             title: '用户昵称',
+            align: 'center',
             dataIndex: 'nickName',
             valueType: 'text',
         },
         {
             title: '账号',
+            align: 'center',
             dataIndex: 'username',
             valueType: 'text',
         },
         {
             title: '用户头像',
+            align: 'center',
             dataIndex: 'avatar',
             valueType: 'image',
         },
         {
             title: '性别',
+            align: 'center',
             dataIndex: 'gender',
             valueEnum: {
                 0: {text: '男'},
@@ -69,16 +74,19 @@ const AdminUserPage: React.FC<unknown> = () => {
         },
         {
             title: '电子邮箱',
+            align: 'center',
             dataIndex: 'email',
             valueType: 'text',
         },
         {
             title: '手机',
+            align: 'center',
             dataIndex: 'phone',
             valueType: 'text',
         },
         {
             title: '用户角色',
+            align: 'center',
             dataIndex: 'userRole',
             valueEnum: {
                 0: {text: '普通用户'},
@@ -87,6 +95,7 @@ const AdminUserPage: React.FC<unknown> = () => {
         },
         {
             title: '用户状态',
+            align: 'center',
             dataIndex: 'status',
             valueEnum: {
                 0: {text: '正常'},
@@ -95,18 +104,21 @@ const AdminUserPage: React.FC<unknown> = () => {
         },
         {
             title: '创建时间',
+            align: 'center',
             dataIndex: 'createTime',
             valueType: 'dateTime',
             hideInForm: true,
         },
         {
             title: '更新时间',
+            align: 'center',
             dataIndex: 'updateTime',
             valueType: 'dateTime',
             hideInForm: true,
         },
         {
             title: '操作',
+            align: 'center',
             dataIndex: 'option',
             valueType: 'option',
             render: (_, record) => (

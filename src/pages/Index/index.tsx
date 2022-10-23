@@ -4,7 +4,11 @@ import styles from './index.less';
 const IndexPage: React.FC = () => {
     // const { name } = useModel('global');
     return (
-        <PageContainer ghost>
+        <PageContainer ghost
+            header={{
+                title:''
+            }}
+        >
             <div className={styles.container}>
 
             </div>

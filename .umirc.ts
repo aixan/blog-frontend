@@ -13,5 +13,8 @@ export default defineConfig({
   mock: false,
   routes,
   npmClient: 'pnpm',
+  analytics: {
+    baidu: '57aa18127dd4715bfb9744b7d3bc5964'
+  }
 });
 

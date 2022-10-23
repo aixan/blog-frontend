@@ -49,11 +49,9 @@ export const layout: RunTimeLayoutConfig = ({initialState}) => {
         contentStyle: {
             paddingBottom: 120,
         },
-        onPageChange: (location: Location) =>{
-            if (!initialState?.loginUser && location.pathname.startsWith("/admin")) {
-                location.href = '/user/login';
-            }
-        },
+        // onPageChange: (location: Location) =>{
+        //
+        // },
         // 默认布局调整
         footerRender: () =>  <GlobalFooter />,
         rightContentRender: () => <RightContent />,
