@@ -10,11 +10,6 @@ export default [
         component: './Index',
     },
     {
-        name: '权限演示',
-        path: '/access',
-        component: './Access',
-    },
-    {
         path: '/user',
         hideInMenu: true,
         headerRender: false,
@@ -43,19 +38,34 @@ export default [
         flatMenu: true,
         routes: [
             {
+                name: '权限演示',
+                path: '/admin/access',
+                component: './Access',
+            },
+            {
+                name: '文章管理',
+                path: '/admin/article',
+                component: './Admin/Article',
+            },
+            {
+                name: '分类管理',
+                path: '/admin/category',
+                component: './Admin/Category',
+            },
+            {
+                name: '标签管理',
+                path: '/admin/tag',
+                component: './Admin/Tag',
+            },
+            {
                 name: '用户管理',
                 path: '/admin/user',
                 component: './Admin/User',
             },
             {
-                name: '帖子管理',
-                path: '/admin/post',
-                // component: 'admin/post',
-            },
-            {
-                name: '标签管理',
-                path: '/admin/tag',
-                // component: 'admin/tag',
+                name: '公告管理',
+                path: '/admin/notice',
+                component: './Admin/Notice',
             },
             {
                 name: '日志中心',

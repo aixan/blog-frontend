@@ -1,21 +1,21 @@
 import React, {useRef, useState} from "react";
-import {listUserByPage, deleteUser} from '@/services/UserService';
-import {Space, Divider, Typography, Popconfirm, message, Button, Tag} from 'antd';
-import {ActionType, PageContainer, ProColumns, ProTable,} from "@ant-design/pro-components";
-import CreateModal from './components/CreateModal';
-import UpdateModal from './components/UpdateModal';
-
+import {ActionType, PageContainer, ProColumns, ProTable} from "@ant-design/pro-components";
+import {listNoticePage} from "@/services/NoticeService";
+import {Button, Divider, message, Popconfirm, Space, Tag, Typography} from "antd";
+import CreateModal from "@/pages/Admin/Notice/components/CreateModal";
+import {deleteNotice} from "@/services/NoticeService";
+import UpdateModal from "@/pages/Admin/Notice/components/UpdateModal";
 
 /**
- * 删除数据
+ * 删除公告数据
  * @param selectedRows
  */
-const doDelete = async (selectedRows: UserType.UserVo[]) => {
+const doDelete = async (selectedRows: NoticeType.NoticeVo[]) => {
     const hide = message.loading('正在删除');
     if (!selectedRows) return true;
     try {
-        await deleteUser({
-            id: selectedRows.find((row) => row.id)?.id || 0,
+        await deleteNotice({
+            noticeId: selectedRows.find((row) => row.noticeId)?.noticeId || 0,
         });
         hide();
         message.success('操作成功');
@@ -26,95 +26,50 @@ const doDelete = async (selectedRows: UserType.UserVo[]) => {
 }
 
 /**
- * 用户管理页面
+ * 公告管理页面
  * @constructor
  */
-const AdminUserPage: React.FC<unknown> = () => {
+const AdminNoticePage: React.FC<unknown> = () => {
     const [createModalVisible, setCreateModalVisible] = useState<boolean>(false);
     const [updateModalVisible, setUpdateModalVisible] = useState<boolean>(false);
-    const [updateData, setUpdateData] = useState<UserType.UserVo>({});
+    const [updateData, setUpdateData] = useState<NoticeType.NoticeVo>({});
     const actionRef = useRef<ActionType>();
 
-    /**
-     * 表格列配置
-     */
-    const columns: ProColumns<UserType.UserVo>[] = [
+    const columns: ProColumns<NoticeType.NoticeVo>[] = [
         {
             title: 'ID',
             align: 'center',
-            dataIndex: 'id',
+            dataIndex: 'noticeId',
             valueType: 'index',
         },
         {
-            title: '用户昵称',
+            title: '标题',
             align: 'center',
-            dataIndex: 'nickName',
+            dataIndex: 'noticeTitle',
             valueType: 'text',
         },
         {
-            title: '账号',
+            title: '类型',
             align: 'center',
-            copyable: true,
-            dataIndex: 'username',
-            valueType: 'text',
-        },
-        {
-            title: '密码',
-            align: 'center',
-            dataIndex: 'password',
-            valueType: 'password',
-            hideInTable: true,
-        },
-        {
-            title: '用户头像',
-            align: 'center',
-            dataIndex: 'avatar',
-            valueType: 'image',
-        },
-        {
-            title: '性别',
-            align: 'center',
-            dataIndex: 'gender',
-            valueEnum: {
-                0: {text: '男'},
-                1: {text: '女'},
-            },
-        },
-        {
-            title: '电子邮箱',
-            align: 'center',
-            copyable: true,
-            dataIndex: 'email',
-            valueType: 'text',
-        },
-        {
-            title: '手机',
-            align: 'center',
-            copyable: true,
-            dataIndex: 'phone',
-            valueType: 'text',
-        },
-        {
-            title: '用户角色',
-            align: 'center',
-            dataIndex: 'userRole',
+            dataIndex: 'noticeType',
             valueType: 'select',
             fieldProps: {
                 options: [
-                    {label: '普通用户', value: 0},
-                    {label: '管理员', value: 1},
+                    {label: '公告', value: 0},
+                    {label: '通知', value: 1},
+                    {label: '提醒', value: 2},
                 ],
-            },
+            }
         },
         {
-            title: '用户状态',
+            title: '类型',
             align: 'center',
             dataIndex: 'status',
             valueType: 'select',
             fieldProps: {
                 options: [
                     {label: '正常', value: 0},
-                    {label: '禁用', value: 1},
+                    {label: '关闭', value: 1},
                 ],
             },
             render: (_, record) => (
@@ -130,8 +85,23 @@ const AdminUserPage: React.FC<unknown> = () => {
                             </Tag>
                         )
                     }
+
                 </Space>
-            )
+            ),
+        },
+        {
+            title: '内容',
+            align: 'center',
+            dataIndex: 'noticeContent',
+            valueType: 'textarea',
+            hideInTable: true,
+        },
+        {
+            title: '创建者',
+            align: 'center',
+            dataIndex: 'createBy',
+            valueType: 'text',
+            hideInForm: true,
         },
         {
             title: '创建时间',
@@ -153,7 +123,7 @@ const AdminUserPage: React.FC<unknown> = () => {
             dataIndex: 'option',
             valueType: 'option',
             render: (_, record) => (
-                <Space split={<Divider type="vertical"/>}>
+                <Space split={<Divider type={'vertical'}/>}>
                     <Typography.Link
                         onClick={() => {
                             setUpdateData(record);
@@ -163,38 +133,37 @@ const AdminUserPage: React.FC<unknown> = () => {
                         修改
                     </Typography.Link>
                     <Popconfirm
-                        title="您确定要删除么？"
+                        title={'您确定要删除么？'}
                         onConfirm={() => doDelete([record])}
-                        okText="确认"
-                        cancelText="取消"
-                    >
-                        <Typography.Link type="danger">删除</Typography.Link>
+                        okText={'确定'}
+                        cancelText={'取消'}>
+                        <Typography.Link type={'danger'}>删除</Typography.Link>
                     </Popconfirm>
                 </Space>
-            ),
+            )
         },
-    ];
+    ]
 
     return (
         <PageContainer>
-            <ProTable<UserType.UserVo>
-                headerTitle={"用户管理"}
+            <ProTable<NoticeType.NoticeVo>
+                headerTitle={'公告管理'}
+                rowKey={'noticeId'}
                 actionRef={actionRef}
-                rowKey="id"
                 search={{
                     labelWidth: 'auto',
                 }}
                 toolBarRender={() => [
                     <Button
-                        key="1"
-                        type="primary"
+                        key={'1'}
+                        type={'primary'}
                         onClick={() => setCreateModalVisible(true)}
                     >
                         新建
                     </Button>,
                 ]}
                 request={async (params, sorter, filter) => {
-                    const {data, code} = await listUserByPage({
+                    const {data, code} = await listNoticePage({
                         ...params,
                         // @ts-ignore
                         sorter,
@@ -204,7 +173,7 @@ const AdminUserPage: React.FC<unknown> = () => {
                         data: data?.records || [],
                         success: code === 0,
                         total: data.total,
-                    } as any;
+                    } as any
                 }}
                 columns={columns}
             />
@@ -225,10 +194,9 @@ const AdminUserPage: React.FC<unknown> = () => {
                     setUpdateModalVisible(false)
                     actionRef.current?.reload(true)
                 }}
-                onCancel={() => setUpdateModalVisible(false)}
-            />
+                onCancel={() => setUpdateModalVisible(false)}/>
         </PageContainer>
     )
 }
 
-export default AdminUserPage;
+export default AdminNoticePage;
