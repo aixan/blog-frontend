@@ -1,7 +1,7 @@
 import React, {PropsWithChildren} from "react";
 import {ProColumns, ProTable} from "@ant-design/pro-components";
 import {message, Modal} from "antd";
-import {addTag} from "@/services/TagService";
+import {addTag} from "@/services/Admin/SysTagService";
 
 
 interface CreateModalProps {

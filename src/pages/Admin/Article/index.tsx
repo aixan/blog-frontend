@@ -2,7 +2,7 @@ import React, {useRef, useState} from "react";
 import {ActionType, PageContainer, ProColumns, ProTable} from "@ant-design/pro-components";
 import {Button, Divider, message, Popconfirm, Space, Tag, Typography} from "antd";
 import CreateModal from "@/pages/Admin/Article/components/CreateModal";
-import {deleteArticle, listArticlePage} from "@/services/ArticleService";
+import {deleteArticle, listArticlePage} from "@/services/Admin/SysArticleService";
 import UpdateModal from "@/pages/Admin/Article/components/UpdateModal";
 
 /**
@@ -41,13 +41,6 @@ const AdminArticlePage: React.FC<unknown> = () => {
             align: 'center',
             dataIndex: 'articleId',
             valueType: 'index',
-        },
-        {
-            title: '标题图',
-            align: 'center',
-            search: false,
-            dataIndex: 'imageUrl',
-            valueType: 'image',
         },
         {
             title: '标题',

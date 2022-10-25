@@ -1,6 +1,6 @@
 import React,{PropsWithChildren} from "react";
 import {message, Drawer} from 'antd';
-import {addUser} from '@/services/UserService';
+import {addUser} from '@/services/Admin/SysUserService';
 import {ProColumns,ProTable} from '@ant-design/pro-components';
 
 interface CreateModalProps {

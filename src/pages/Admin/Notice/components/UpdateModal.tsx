@@ -1,7 +1,7 @@
 import React, {PropsWithChildren} from "react";
 import {ProColumns, ProTable} from "@ant-design/pro-components";
 import {message, Modal} from "antd";
-import {updateNotice} from "@/services/NoticeService";
+import {updateNotice} from "@/services/Admin/SysNoticeService";
 
 interface UpdateModalProps {
     oldData: NoticeType.NoticeVo;

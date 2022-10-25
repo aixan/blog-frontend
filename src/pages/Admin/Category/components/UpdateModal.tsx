@@ -1,7 +1,7 @@
 import React, {PropsWithChildren} from "react";
 import {message, Modal} from "antd";
 import {ProColumns, ProTable} from "@ant-design/pro-components";
-import {updateCategory} from "@/services/CategoryService";
+import {updateCategory} from "@/services/Admin/SysCategoryService";
 
 interface UpdateModalProps {
     oldData: CategoryType.CategoryVo;

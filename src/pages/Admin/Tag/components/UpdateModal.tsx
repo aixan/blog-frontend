@@ -1,7 +1,7 @@
 import React, {PropsWithChildren} from "react";
 import {message, Modal} from "antd";
 import {ProColumns,ProTable} from "@ant-design/pro-components";
-import {updateTag} from "@/services/TagService";
+import {updateTag} from "@/services/Admin/SysTagService";
 
 interface UpdateModalProps {
     oldData: TagType.TagVo,

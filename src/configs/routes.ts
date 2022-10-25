@@ -10,6 +10,12 @@ export default [
         component: './Index',
     },
     {
+        name:'文章',
+        path:'/article/:id',
+        hideInMenu: true,
+        component: './Article/'
+    },
+    {
         path: '/user',
         hideInMenu: true,
         headerRender: false,

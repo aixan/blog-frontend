@@ -1,7 +1,7 @@
 import React, {useRef, useState} from "react";
 import {ActionType, PageContainer, ProColumns, ProTable} from "@ant-design/pro-components";
 import {Button, Divider, message, Popconfirm, Space, Typography} from "antd";
-import {deleteCategory, listCategoryPage} from "@/services/CategoryService";
+import {deleteCategory, listCategoryPage} from "@/services/Admin/SysCategoryService";
 import CreateModal from "@/pages/Admin/Category/components/CreateModal";
 import UpdateModal from "@/pages/Admin/Category/components/UpdateModal";
 

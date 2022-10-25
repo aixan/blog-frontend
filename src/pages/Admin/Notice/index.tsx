@@ -1,9 +1,9 @@
 import React, {useRef, useState} from "react";
 import {ActionType, PageContainer, ProColumns, ProTable} from "@ant-design/pro-components";
-import {listNoticePage} from "@/services/NoticeService";
+import {listNoticePage} from "@/services/Admin/SysNoticeService";
 import {Button, Divider, message, Popconfirm, Space, Tag, Typography} from "antd";
 import CreateModal from "@/pages/Admin/Notice/components/CreateModal";
-import {deleteNotice} from "@/services/NoticeService";
+import {deleteNotice} from "@/services/Admin/SysNoticeService";
 import UpdateModal from "@/pages/Admin/Notice/components/UpdateModal";
 
 /**

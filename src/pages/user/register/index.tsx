@@ -1,7 +1,7 @@
 import Logo from '@/assets/logo.svg';
 import { useNavigate } from '@umijs/max';
 import {message} from "antd";
-import {userRegister} from "@/services/UserService";
+import {userRegister} from "@/services/Admin/SysUserService";
 import {LoginForm, ProFormCaptcha, ProFormText} from "@ant-design/pro-components";
 import {LockOutlined, MailTwoTone, UserOutlined, PhoneOutlined} from "@ant-design/icons";
 import {Link} from "@@/exports";

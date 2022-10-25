@@ -4,7 +4,7 @@ import {Avatar, Button, Dropdown, Menu, message} from "antd";
 import {Link} from "@@/exports";
 import styles from './index.less';
 import {stringify} from 'querystring';
-import {userLogout} from "@/services/UserService";
+import {userLogout} from "@/services/Admin/SysUserService";
 import {LogoutOutlined} from "@ant-design/icons";
 
 /**

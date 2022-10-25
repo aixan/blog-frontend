@@ -1,7 +1,7 @@
 import React, {PropsWithChildren} from "react";
 import {ProColumns, ProTable} from "@ant-design/pro-components";
 import {Drawer, message} from "antd";
-import {updateArticle} from "@/services/ArticleService";
+import {updateArticle} from "@/services/Admin/SysArticleService";
 
 interface UpdateModalProps {
     oldData: ArticleType.ArticleVo;

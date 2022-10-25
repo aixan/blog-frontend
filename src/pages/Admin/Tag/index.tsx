@@ -1,7 +1,7 @@
 import React, {useRef, useState} from "react";
 import {ActionType, PageContainer, ProColumns, ProTable} from "@ant-design/pro-components";
 import {Button, Divider, message, Popconfirm, Space, Typography} from "antd";
-import {listTagPage,deleteTag} from "@/services/TagService";
+import {listTagPage,deleteTag} from "@/services/Admin/SysTagService";
 import CreateModal from "@/pages/Admin/Tag/components/CreateModal";
 import UpdateModal from "@/pages/Admin/Tag/components/UpdateModal";
 

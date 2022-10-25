@@ -2,7 +2,7 @@ import Logo from '@/assets/logo.svg';
 import React from 'react';
 import {message} from 'antd';
 import {useModel} from "@umijs/max";
-import {getLoginUser, userLogin} from "@/services/UserService";
+import {getLoginUser, userLogin} from "@/services/Admin/SysUserService";
 import {LoginForm, ProFormText} from '@ant-design/pro-components';
 import {LockOutlined, UserOutlined} from "@ant-design/icons";
 import {Link, useSearchParams} from "@@/exports";

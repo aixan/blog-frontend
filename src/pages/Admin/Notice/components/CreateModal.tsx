@@ -1,6 +1,6 @@
 import React, {PropsWithChildren} from "react";
 import {message, Modal} from "antd";
-import {addNotice} from "@/services/NoticeService";
+import {addNotice} from "@/services/Admin/SysNoticeService";
 import {ProColumns, ProTable} from "@ant-design/pro-components";
 
 

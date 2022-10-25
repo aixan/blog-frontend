@@ -10,7 +10,21 @@ declare namespace ArticleType {
         totalViews?: number;
         status?: number;
         articleDesc?: string;
-        imageUrl?: string;
+        createTime?: Date;
+        updateTime?: Date;
+    }
+
+    interface ArticleIndexVo {
+        articleId?: number;
+        articleTitle?: string;
+        userId?: number;
+        nickName?: string;
+        categoryId?: number;
+        categoryName?: string;
+        content?: string;
+        totalViews?: number;
+        status?: number;
+        articleDesc?: string;
         createTime?: Date;
         updateTime?: Date;
     }
@@ -39,7 +53,6 @@ declare namespace ArticleType {
         totalViews?: number;
         status?: number;
         articleDesc?: string;
-        imageUrl?: string;
     }
 
     /**
@@ -54,7 +67,6 @@ declare namespace ArticleType {
         totalViews?: number;
         status?: number;
         articleDesc?: string;
-        imageUrl?: string;
     }
 
     /**

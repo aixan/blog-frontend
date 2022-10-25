@@ -1,7 +1,7 @@
 import React, {PropsWithChildren} from "react";
 import {message, Modal} from "antd";
 import {ProColumns,ProTable} from "@ant-design/pro-components";
-import {addCategory} from "@/services/CategoryService";
+import {addCategory} from "@/services/Admin/SysCategoryService";
 
 interface CreateModalProps {
     modalVisible: boolean;

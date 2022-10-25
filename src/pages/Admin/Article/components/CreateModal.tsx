@@ -1,6 +1,6 @@
 import React, {PropsWithChildren} from "react";
 import {Drawer, message} from "antd";
-import {addArticle} from "@/services/ArticleService";
+import {addArticle} from "@/services/Admin/SysArticleService";
 import {ProColumns, ProTable} from "@ant-design/pro-components";
 
 

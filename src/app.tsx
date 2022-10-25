@@ -6,7 +6,7 @@ import Logo from '@/assets/logo.svg'
 import GlobalFooter from '@/components/GlobalFooter';
 import RightContent from '@/components/GlobalHeader/RightContent'
 import {RequestConfig} from "@@/plugin-request/request";
-import {getLoginUser} from "@/services/UserService";
+import {getLoginUser} from "@/services/Admin/SysUserService";
 import { RunTimeLayoutConfig } from '@@/plugin-layout/types';
 import './global.less';
 import React from "react";

@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
 import {ActionType, PageContainer, ProColumns, ProTable} from "@ant-design/pro-components";
-import {listLogLoginPage} from "@/services/LogLoginService";
+import {listLogLoginPage} from "@/services/Admin/SysLogLoginService";
 import {Space, Tag} from "antd";
 
 const LogLoginPage: React.FC = () => {

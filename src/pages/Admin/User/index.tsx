@@ -1,5 +1,5 @@
 import React, {useRef, useState} from "react";
-import {listUserByPage, deleteUser} from '@/services/UserService';
+import {listUserByPage, deleteUser} from '@/services/Admin/SysUserService';
 import {Space, Divider, Typography, Popconfirm, message, Button, Tag} from 'antd';
 import {ActionType, PageContainer, ProColumns, ProTable,} from "@ant-design/pro-components";
 import CreateModal from './components/CreateModal';
