@@ -5,26 +5,6 @@ import {ActionType, PageContainer, ProColumns, ProTable,} from "@ant-design/pro-
 import CreateModal from './components/CreateModal';
 import UpdateModal from './components/UpdateModal';
 
-
-/**
- * 删除数据
- * @param selectedRows
- */
-const doDelete = async (selectedRows: UserType.UserVo[]) => {
-    const hide = message.loading('正在删除');
-    if (!selectedRows) return true;
-    try {
-        await deleteUser({
-            id: selectedRows.find((row) => row.id)?.id || 0,
-        });
-        hide();
-        message.success('操作成功');
-    } catch (e: any) {
-        hide();
-        message.error('操作失败，' + e.message);
-    }
-}
-
 /**
  * 用户管理页面
  * @constructor
@@ -34,6 +14,26 @@ const AdminUserPage: React.FC<unknown> = () => {
     const [updateModalVisible, setUpdateModalVisible] = useState<boolean>(false);
     const [updateData, setUpdateData] = useState<UserType.UserVo>({});
     const actionRef = useRef<ActionType>();
+
+    /**
+     * 删除数据
+     * @param selectedRows
+     */
+    const doDelete = async (selectedRows: UserType.UserVo[]) => {
+        const hide = message.loading('正在删除');
+        if (!selectedRows) return true;
+        try {
+            await deleteUser({
+                id: selectedRows.find((row) => row.id)?.id || 0,
+            });
+            hide();
+            message.success('操作成功');
+        } catch (e: any) {
+            hide();
+            message.error('操作失败，' + e.message);
+        }
+        actionRef.current?.reload(true);
+    }
 
     /**
      * 表格列配置
@@ -75,9 +75,12 @@ const AdminUserPage: React.FC<unknown> = () => {
             title: '性别',
             align: 'center',
             dataIndex: 'gender',
-            valueEnum: {
-                0: {text: '男'},
-                1: {text: '女'},
+            valueType: 'select',
+            fieldProps: {
+                options: [
+                    {label: '男', value: 0},
+                    {label: '女', value: 1},
+                ],
             },
         },
         {
@@ -215,7 +218,7 @@ const AdminUserPage: React.FC<unknown> = () => {
                     setCreateModalVisible(false)
                     actionRef.current?.reload(true)
                 }}
-                onCancel={() => setCreateModalVisible(false)}
+                onClose={() => setCreateModalVisible(false)}
             />
             <UpdateModal
                 oldData={updateData}
@@ -225,7 +228,7 @@ const AdminUserPage: React.FC<unknown> = () => {
                     setUpdateModalVisible(false)
                     actionRef.current?.reload(true)
                 }}
-                onCancel={() => setUpdateModalVisible(false)}
+                onClose={() => setUpdateModalVisible(false)}
             />
         </PageContainer>
     )

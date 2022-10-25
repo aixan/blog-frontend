@@ -6,25 +6,6 @@ import CreateModal from "@/pages/Admin/Category/components/CreateModal";
 import UpdateModal from "@/pages/Admin/Category/components/UpdateModal";
 
 /**
- * 删除分类数据
- * @param selectedRows
- */
-const doDelete = async (selectedRows: CategoryType.CategoryVo[]) => {
-    const hide = message.loading('正在删除');
-    if (!selectedRows) return true;
-    try {
-        await deleteCategory({
-            categoryId: selectedRows.find((row) => row.categoryId)?.categoryId || 0,
-        });
-        hide();
-        message.success('操作成功');
-    } catch (e: any) {
-        hide();
-        message.error('操作失败，' + e.message);
-    }
-}
-
-/**
  * 分类管理页面
  * @constructor
  */
@@ -33,6 +14,26 @@ const AdminCategoryPage: React.FC<unknown> = () => {
     const [updateModalVisible,setUpdateModalVisible] = useState<boolean>(false);
     const [updateData,setUpdateData] = useState<CategoryType.CategoryVo>({});
     const actionRef = useRef<ActionType>()
+
+    /**
+     * 删除分类数据
+     * @param selectedRows
+     */
+    const doDelete = async (selectedRows: CategoryType.CategoryVo[]) => {
+        const hide = message.loading('正在删除');
+        if (!selectedRows) return true;
+        try {
+            await deleteCategory({
+                categoryId: selectedRows.find((row) => row.categoryId)?.categoryId || 0,
+            });
+            hide();
+            message.success('操作成功');
+        } catch (e: any) {
+            hide();
+            message.error('操作失败，' + e.message);
+        }
+        actionRef.current?.reload(true);
+    }
 
     const columns: ProColumns<CategoryType.CategoryVo>[] = [
         {

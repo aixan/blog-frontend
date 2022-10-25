@@ -6,25 +6,6 @@ import CreateModal from "@/pages/Admin/Tag/components/CreateModal";
 import UpdateModal from "@/pages/Admin/Tag/components/UpdateModal";
 
 /**
- * 删除标签数据
- * @param selectedRows
- */
-const doDelete = async (selectedRows: TagType.TagVo[]) => {
-    const hide = message.loading('正在删除');
-    if (!selectedRows) return true;
-    try {
-        await deleteTag({
-            tagId: selectedRows.find((row) => row.tagId)?.tagId || 0,
-        });
-        hide();
-        message.success('操作成功');
-    } catch (e: any) {
-        hide();
-        message.error('操作失败，' + e.message);
-    }
-}
-
-/**
  * 标签管理页面
  * @constructor
  */
@@ -33,6 +14,26 @@ const AdminTagPage: React.FC<unknown> = () => {
     const [updateModalVisible, setUpdateModalVisible] = useState<boolean>(false);
     const [updateData, setUpdateData] = useState<TagType.TagVo>({});
     const actionRef = useRef<ActionType>();
+
+    /**
+     * 删除标签数据
+     * @param selectedRows
+     */
+    const doDelete = async (selectedRows: TagType.TagVo[]) => {
+        const hide = message.loading('正在删除');
+        if (!selectedRows) return true;
+        try {
+            await deleteTag({
+                tagId: selectedRows.find((row) => row.tagId)?.tagId || 0,
+            });
+            hide();
+            message.success('操作成功');
+        } catch (e: any) {
+            hide();
+            message.error('操作失败，' + e.message);
+        }
+        actionRef.current?.reload(true);
+    }
 
     const columns: ProColumns<TagType.TagVo>[] = [
         {

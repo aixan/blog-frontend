@@ -7,25 +7,6 @@ import {deleteNotice} from "@/services/NoticeService";
 import UpdateModal from "@/pages/Admin/Notice/components/UpdateModal";
 
 /**
- * 删除公告数据
- * @param selectedRows
- */
-const doDelete = async (selectedRows: NoticeType.NoticeVo[]) => {
-    const hide = message.loading('正在删除');
-    if (!selectedRows) return true;
-    try {
-        await deleteNotice({
-            noticeId: selectedRows.find((row) => row.noticeId)?.noticeId || 0,
-        });
-        hide();
-        message.success('操作成功');
-    } catch (e: any) {
-        hide();
-        message.error('操作失败，' + e.message);
-    }
-}
-
-/**
  * 公告管理页面
  * @constructor
  */
@@ -34,6 +15,26 @@ const AdminNoticePage: React.FC<unknown> = () => {
     const [updateModalVisible, setUpdateModalVisible] = useState<boolean>(false);
     const [updateData, setUpdateData] = useState<NoticeType.NoticeVo>({});
     const actionRef = useRef<ActionType>();
+
+    /**
+     * 删除公告数据
+     * @param selectedRows
+     */
+    const doDelete = async (selectedRows: NoticeType.NoticeVo[]) => {
+        const hide = message.loading('正在删除');
+        if (!selectedRows) return true;
+        try {
+            await deleteNotice({
+                noticeId: selectedRows.find((row) => row.noticeId)?.noticeId || 0,
+            });
+            hide();
+            message.success('操作成功');
+        } catch (e: any) {
+            hide();
+            message.error('操作失败，' + e.message);
+        }
+        actionRef.current?.reload(true);
+    }
 
     const columns: ProColumns<NoticeType.NoticeVo>[] = [
         {

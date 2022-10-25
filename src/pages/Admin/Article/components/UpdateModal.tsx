@@ -1,12 +1,12 @@
-import React,{PropsWithChildren} from "react";
-import {message, Drawer} from 'antd';
-import {updateUser} from '@/services/UserService';
-import {ProColumns,ProTable} from '@ant-design/pro-components';
+import React, {PropsWithChildren} from "react";
+import {ProColumns, ProTable} from "@ant-design/pro-components";
+import {Drawer, message} from "antd";
+import {updateArticle} from "@/services/ArticleService";
 
 interface UpdateModalProps {
-    oldData: UserType.UserVo;
+    oldData: ArticleType.ArticleVo;
     modalVisible: boolean;
-    columns: ProColumns<UserType.UserVo>[];
+    columns: ProColumns<ArticleType.ArticleVo>[];
     onSubmit: () => void;
     onClose: () => void;
 }
@@ -15,11 +15,11 @@ interface UpdateModalProps {
  * 更新数据模态框
  * @param fields
  */
-const handleUpdate = async (fields: UserType.UserVo) => {
+const handleUpdate = async (fields: ArticleType.ArticleVo) => {
     const hide = message.loading('正在配置');
     try {
-        await updateUser({
-            id: fields.id ?? 0,
+        await updateArticle({
+            articleId: fields.articleId ?? 0,
             ...fields,
         });
         hide();
@@ -38,19 +38,19 @@ const handleUpdate = async (fields: UserType.UserVo) => {
  * @constructor
  */
 const UpdateModal: React.FC<PropsWithChildren<UpdateModalProps>> = (props) => {
-    const { oldData, columns, modalVisible, onSubmit, onClose } = props;
+    const {oldData, modalVisible, columns, onSubmit, onClose} = props
 
     return (
         <Drawer
+            title={'更新'}
             destroyOnClose
-            title="更新"
             open={modalVisible}
-            onClose={() => onClose()}
+            onClose={onClose}
             footer={null}
         >
-            <ProTable<UserType.UserVo, UserType.UserVo>
-                rowKey="id"
-                type="form"
+            <ProTable<ArticleType.ArticleVo, ArticleType.ArticleVo>
+                rowKey={'articleId'}
+                type={'form'}
                 columns={columns}
                 form={{
                     initialValues: oldData,
@@ -58,7 +58,7 @@ const UpdateModal: React.FC<PropsWithChildren<UpdateModalProps>> = (props) => {
                 onSubmit={async (value) => {
                     const success = await handleUpdate({
                         ...value,
-                        id: oldData.id,
+                        articleId: oldData.articleId,
                     });
                     if (success) {
                         onSubmit?.();

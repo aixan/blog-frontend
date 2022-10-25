@@ -38,11 +38,6 @@ export default [
         flatMenu: true,
         routes: [
             {
-                name: '权限演示',
-                path: '/admin/access',
-                component: './Access',
-            },
-            {
                 name: '文章管理',
                 path: '/admin/article',
                 component: './Admin/Article',
