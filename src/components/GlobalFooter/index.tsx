@@ -1,6 +1,6 @@
 import React from 'react';
 import {DefaultFooter} from "@ant-design/pro-components";
-import {GithubOutlined, UserOutlined, CrownOutlined} from "@ant-design/icons";
+import {GithubOutlined} from "@ant-design/icons";
 import './index.less';
 
 /**
@@ -13,23 +13,23 @@ const GlobalFooter: React.FC = () => {
     return (
         <DefaultFooter
             className="default-footer"
-            copyright={`${currentYear} 开发生存时间 + <a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备14008887号-3</a>`}
+            copyright={`${currentYear} 开发生存时间`}
             links={[
                 {
                     key: '1',
                     title: (
                         <>
-                            <UserOutlined /> 站长：程序员
+                            开发生存时间
                         </>
                     ),
-                    href: 'https://space.bilibili.com/12890453/',
+                    href: 'https://devttl.cn/',
                     blankTarget: true,
                 },
                 {
                     key: '2',
                     title: (
                         <>
-                            <GithubOutlined /> 开源地址
+                            <GithubOutlined />
                         </>
                     ),
                     href: 'https://github.com/aixan/',
@@ -39,10 +39,10 @@ const GlobalFooter: React.FC = () => {
                     key: '3',
                     title: (
                         <>
-                            <CrownOutlined /> 开发生存时间
+                            豫ICP备14008887号-3
                         </>
                     ),
-                    href: 'https://devttl.cn/',
+                    href: 'https://beian.miit.gov.cn/',
                     blankTarget: true,
                 },
             ]}

@@ -1,13 +1,11 @@
 import React, {useRef} from 'react';
 import {ActionType, PageContainer, ProColumns, ProTable} from "@ant-design/pro-components";
 import {listLogOperationPage} from "@/services/Admin/SysLogOperationService";
-import {Space, Tag} from "antd";
 
 const LogOperationPage: React.FC = () => {
     const actionRef = useRef<ActionType>()
 
     const columns: ProColumns<LogOperationType.Operation>[] = [
-
         {
             title: 'ID',
             align: 'center',
@@ -15,7 +13,7 @@ const LogOperationPage: React.FC = () => {
             valueType: 'index',
         },
         {
-            title: '操作地址',
+            title: '操作IP',
             align: 'center',
             dataIndex: 'operationIp',
             valueType: 'text',
@@ -48,7 +46,12 @@ const LogOperationPage: React.FC = () => {
     ]
 
     return (
-        <PageContainer>
+        <PageContainer
+            header={{
+                title: '操作日志',
+                breadcrumb: {},
+            }}
+        >
             <ProTable<LogOperationType.Operation>
                 headerTitle={'操作日志'}
                 rowKey={'operationLogId'}

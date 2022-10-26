@@ -48,7 +48,6 @@ export default () => {
                 <>
                     <ProFormText
                         name="username"
-                        initialValue={'admin'}
                         fieldProps={{
                             size: 'large',
                             prefix: <UserOutlined className={'prefixIcon'}/>,
@@ -63,7 +62,6 @@ export default () => {
                     />
                     <ProFormText.Password
                         name="password"
-                        initialValue={'32729842'}
                         fieldProps={{
                             size: 'large',
                             prefix: <LockOutlined className={'prefixIcon'}/>,

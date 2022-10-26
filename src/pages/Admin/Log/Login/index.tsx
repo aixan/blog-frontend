@@ -74,7 +74,12 @@ const LogLoginPage: React.FC = () => {
     ]
 
     return (
-        <PageContainer>
+        <PageContainer
+            header={{
+                title: '登录日志',
+                breadcrumb: {},
+            }}
+        >
             <ProTable<LogLoginType.Login>
                 headerTitle={'登录日志'}
                 actionRef={actionRef}
