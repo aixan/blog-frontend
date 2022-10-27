@@ -5,6 +5,7 @@ declare namespace UserType {
      * 登录请求
      */
     interface UserLoginRequest {
+        loginType: string;
         username: string;
         password: string;
     }

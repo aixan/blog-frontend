@@ -1,11 +1,12 @@
 import Logo from '@/assets/logo.svg';
 import { useNavigate } from '@umijs/max';
 import {message} from "antd";
-import {userRegister} from "@/services/Admin/SysUserService";
+import {userRegister} from "@/services/UserService";
 import {LoginForm, ProFormCaptcha, ProFormText} from "@ant-design/pro-components";
 import {LockOutlined, MailTwoTone, UserOutlined, PhoneOutlined} from "@ant-design/icons";
 import {Link} from "@@/exports";
 import React from "react";
+import {sendRegisterSms} from "@/services/SmsService";
 
 
 export default () => {
@@ -25,17 +26,9 @@ export default () => {
             })
         } catch (e: any) {
             hide();
-            message.error('注册失败，请重试！');
+            message.error(e.message);
         }
     }
-
-    const waitTime = (time: number = 100) => {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(true);
-            }, time);
-        });
-    };
 
     /**
      * 校验手机号码
@@ -160,8 +153,13 @@ export default () => {
                         // 如果需要失败可以 throw 一个错误出来，onGetCaptcha 会自动停止
                         // throw new Error("获取验证码错误")
                         onGetCaptcha={async (phone) => {
-                            await waitTime(1000);
-                            message.success(`手机号 ${phone} 验证码发送成功!`);
+                            sendRegisterSms(phone)
+                                .then(() => {
+                                    message.success(`手机号 ${phone} 验证码发送成功!`);
+                                })
+                                .catch((e) => {
+                                    throw new Error(e.message)
+                                })
                         }}
                     />
                 </>

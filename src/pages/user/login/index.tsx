@@ -1,14 +1,17 @@
 import Logo from '@/assets/logo.svg';
-import React from 'react';
-import {message} from 'antd';
+import React, {useState} from 'react';
+import {message, Tabs} from 'antd';
 import {useModel} from "@umijs/max";
 import {getLoginUser, userLogin} from "@/services/Admin/SysUserService";
-import {LoginForm, ProFormText} from '@ant-design/pro-components';
-import {LockOutlined, UserOutlined} from "@ant-design/icons";
+import {LoginForm, ProFormCaptcha, ProFormText} from '@ant-design/pro-components';
+import {LockOutlined, MobileOutlined, UserOutlined} from "@ant-design/icons";
 import {Link, useSearchParams} from "@@/exports";
 
+// 登录方式
+type LoginType = 'account' | 'phone';
 
 export default () => {
+    const [loginType, setLoginType] = useState<LoginType>('account');
     const [searchParams] = useSearchParams();
     const {initialState, setInitialState} = useModel('@@initialState');
 
@@ -42,39 +45,98 @@ export default () => {
                 title="开发生存时间"
                 subTitle='记录开发'
                 onFinish={async (fromData: UserType.UserLoginRequest) => {
+                    fromData.loginType = loginType
                     await doUserLogin(fromData);
                 }}
             >
-                <>
-                    <ProFormText
-                        name="username"
-                        fieldProps={{
-                            size: 'large',
-                            prefix: <UserOutlined className={'prefixIcon'}/>,
-                        }}
-                        placeholder={'请输入账号'}
-                        rules={[
-                            {
-                                required: true,
-                                message: '请输入账号!',
-                            },
-                        ]}
-                    />
-                    <ProFormText.Password
-                        name="password"
-                        fieldProps={{
-                            size: 'large',
-                            prefix: <LockOutlined className={'prefixIcon'}/>,
-                        }}
-                        placeholder={'请输入密码'}
-                        rules={[
-                            {
-                                required: true,
-                                message: '请输入密码！',
-                            },
-                        ]}
-                    />
-                </>
+                <Tabs
+                    centered
+                    activeKey={loginType}
+                    onChange={(activeKey) => setLoginType(activeKey as LoginType)}
+                >
+                    <Tabs.TabPane key={'account'} tab={'账号密码登录'} />
+                    <Tabs.TabPane key={'phone'} tab={'手机号登录'} />
+                </Tabs>
+                {loginType === 'account' && (
+                    <>
+                        <ProFormText
+                            name="username"
+                            fieldProps={{
+                                size: 'large',
+                                prefix: <UserOutlined className={'prefixIcon'}/>,
+                            }}
+                            placeholder={'请输入账号'}
+                            rules={[
+                                {
+                                    required: true,
+                                    message: '请输入账号!',
+                                },
+                            ]}
+                        />
+                        <ProFormText.Password
+                            name="password"
+                            fieldProps={{
+                                size: 'large',
+                                prefix: <LockOutlined className={'prefixIcon'}/>,
+                            }}
+                            placeholder={'请输入密码'}
+                            rules={[
+                                {
+                                    required: true,
+                                    message: '请输入密码！',
+                                },
+                            ]}
+                        />
+                    </>
+                )}
+                {loginType === 'phone' && (
+                    <>
+                        <ProFormText
+                            fieldProps={{
+                                size: 'large',
+                                prefix: <MobileOutlined className={'prefixIcon'} />,
+                            }}
+                            name="mobile"
+                            placeholder={'手机号'}
+                            rules={[
+                                {
+                                    required: true,
+                                    message: '请输入手机号！',
+                                },
+                                {
+                                    pattern: /^1\d{10}$/,
+                                    message: '手机号格式错误！',
+                                },
+                            ]}
+                        />
+                        <ProFormCaptcha
+                            fieldProps={{
+                                size: 'large',
+                                prefix: <LockOutlined className={'prefixIcon'} />,
+                            }}
+                            captchaProps={{
+                                size: 'large',
+                            }}
+                            placeholder={'请输入验证码'}
+                            captchaTextRender={(timing, count) => {
+                                if (timing) {
+                                    return `${count} ${'获取验证码'}`;
+                                }
+                                return '获取验证码';
+                            }}
+                            name="captcha"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: '请输入验证码！',
+                                },
+                            ]}
+                            onGetCaptcha={async () => {
+                                message.success('获取验证码成功！验证码为：1234');
+                            }}
+                        />
+                    </>
+                )}
                 <div
                     style={{
                         marginBottom: 24,
